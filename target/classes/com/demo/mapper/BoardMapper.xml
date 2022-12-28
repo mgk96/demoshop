@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.BoardMapper">
+
+<select id="getList" resultType="com.demo.domain.BoardVO">
+	select bno, title, content, writer, regdate, updatedate from tbl_board order by bno desc
+
+</select>
+
+<insert id="write" parameterType="com.demo.domain.BoardVO">
+
+	insert  into tbl_board(bno, title, content, writer)
+	values(seq_board.nextval, #{title},	#{content},	#{writer}) 
+</insert>
+
+	<select id="get" resultType="com.demo.domain.BoardVO" parameterType="Long">
+		select bno, title, content, writer, regdate, updatedate from tbl_board where bno = #{bno}
+	</select>
+	
+	<update id="modify" parameterType="com.demo.domain.BoardVO">
+		update tbl_board
+			set title = #{title},content = #{content}
+		where bno = #{bno}
+	</update>
+	
+</mapper>
+
